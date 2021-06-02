@@ -5,25 +5,25 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>EstateAgency Bootstrap Template - Index</title>
+    <title>property information</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
     <!-- Favicons -->
-    <link href="assets/img/favicon.png" rel="icon">
-    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="{{ asset('assets/img/favicon.png')  }}" rel="icon">
+    <link href="{{ asset('assets/img/apple-touch-icon.png') }} " rel="apple-touch-icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/animate.css/animate.min.css')  }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css')  }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css')  }}" rel="stylesheet">
+    <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css')  }}" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="{{ asset('assets/css/style.css')  }}" rel="stylesheet">
 
     <!-- =======================================================
     * Template Name: EstateAgency - v4.3.0
@@ -191,7 +191,7 @@
             <div class="row">
                 <div class="col-md-12 col-lg-8">
                     <div class="title-single-box">
-                        <h1 class="title-single">304  Property ID</h1>
+                        <h1 class="title-single"> {{ $property->id }}  Property ID</h1>
                     </div>
                 </div>
                 <div class="col-md-12 col-lg-4">
@@ -221,10 +221,10 @@
                     <div id="property-single-carousel" class="swiper-container">
                         <div class="swiper-wrapper">
                             <div class="carousel-item-b swiper-slide">
-                                <img src="assets/img/slide-1.jpg" alt="">
+                                <img src="{{ asset('assets/img/slide-1.jpg') }}" alt="">
                             </div>
                             <div class="carousel-item-b swiper-slide">
-                                <img src="assets/img/slide-2.jpg" alt="">
+                                <img src="{{ asset('assets/img/slide-2.jpg') }}" alt="">
                             </div>
                         </div>
                     </div>
@@ -243,7 +243,7 @@
                                         <span class="bi bi-cash">$</span>
                                     </div>
                                     <div class="card-title-c align-self-center">
-                                        <h5 class="title-c">15000</h5>
+                                        <h5 class="title-c">{{ $property->price }}</h5>
                                     </div>
                                 </div>
                             </div>
@@ -259,33 +259,41 @@
                                     <ul class="list">
                                         <li class="d-flex justify-content-between">
                                             <strong>Property ID:</strong>
-                                            <span>1134</span>
+                                            <span>{{ $property->id }} </span>
                                         </li>
                                         <li class="d-flex justify-content-between">
-                                            <strong>Location:</strong>
-                                            <span>Chicago, IL 606543</span>
+                                            <strong>City:</strong>
+                                            <span>{{ $property->get_city->name }} </span>
+                                        </li>
+                                        <li class="d-flex justify-content-between">
+                                            <strong>Town:</strong>
+                                            <span>{{ $property->get_town->name }} </span>
                                         </li>
                                         <li class="d-flex justify-content-between">
                                             <strong>Property Type:</strong>
-                                            <span>House</span>
+                                            <span>{{ $property->type }}</span>
                                         </li>
                                         <li class="d-flex justify-content-between">
                                             <strong>Status:</strong>
-                                            <span>Sale</span>
+                                           @if( $property->for_sale)
+                                            <span>sale</span>
+                                            @else
+                                                <span>rent</span>
+                                            @endif
                                         </li>
                                         <li class="d-flex justify-content-between">
                                             <strong>Area:</strong>
-                                            <span>340m
+                                            <span>{{ $property->area }}m
                           <sup>2</sup>
                         </span>
                                         </li>
                                         <li class="d-flex justify-content-between">
-                                            <strong>Beds:</strong>
-                                            <span>4</span>
+                                            <strong>Room:</strong>
+                                            <span>{{ $property->number_of_rooms }}</span>
                                         </li>
                                         <li class="d-flex justify-content-between">
                                             <strong>Baths:</strong>
-                                            <span>2</span>
+                                            <span>{{ $property->number_of_bathrooms }}</span>
                                         </li>
                                         <li class="d-flex justify-content-between">
                                             <strong>Garage:</strong>
@@ -305,21 +313,9 @@
                             </div>
                             <div class="property-description">
                                 <p class="description color-text-a">
-                                    Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia
-                                    Curae; Donec velit
-                                    neque, auctor sit amet
-                                    aliquam vel, ullamcorper sit amet ligula. Cras ultricies ligula sed magna dictum
-                                    porta.
-                                    Curabitur aliquet quam id dui posuere blandit. Mauris blandit aliquet elit, eget
-                                    tincidunt
-                                    nibh pulvinar quam id dui posuere blandit.
+                                    {{ $property->owner_description }}
                                 </p>
-                                <p class="description color-text-a no-margin">
-                                    Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Donec rutrum congue
-                                    leo eget
-                                    malesuada. Quisque velit nisi,
-                                    pretium ut lacinia in, elementum id enim. Donec sollicitudin molestie malesuada.
-                                </p>
+
                             </div>
                             <div class="row section-t3">
                                 <div class="col-sm-12">
@@ -435,17 +431,16 @@
     </div>
 </footer><!-- End  Footer -->
 
-<div id="preloader"></div>
 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
         class="bi bi-arrow-up-short"></i></a>
 
 <!-- Vendor JS Files -->
-<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="assets/vendor/php-email-form/validate.js"></script>
-<script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+<script src="   {{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}  "></script>
+<script src="   {{ asset('assets/vendor/php-email-form/validate.js')}}   "></script>
+<script src="  {{ asset('assets/vendor/swiper/swiper-bundle.min.js')}}  "></script>
 
 <!-- Template Main JS File -->
-<script src="assets/js/main.js"></script>
+<script src="  {{ asset('/js/main.js')}}  "></script>
 
 </body>
 

@@ -18,7 +18,7 @@ class CreateRealEstatesTable extends Migration
             $table->string('phone');
             $table->integer('city_id');
             $table->integer('town_id');
-            $table->integer('type');
+            $table->string('type');
             $table->boolean('for_sale');//true for sale
             $table->boolean('for_rent');//true for rent
             $table->integer('duration_of_rent')->nullable();// in month
