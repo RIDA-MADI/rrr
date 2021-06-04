@@ -191,7 +191,7 @@
             <div class="row">
                 <div class="col-md-12 col-lg-8">
                     <div class="title-single-box">
-                        <h1 class="title-single"> {{ $property->id }}  Property ID</h1>
+                        <h1 class="title-single"> {{ $property->id }} : Property ID</h1>
                     </div>
                 </div>
                 <div class="col-md-12 col-lg-4">
@@ -204,7 +204,7 @@
                                 <a href="property-grid.html">Properties</a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">
-                                 Property ID
+                                Property ID :{{ $property->id }}
                             </li>
                         </ol>
                     </nav>
@@ -220,12 +220,11 @@
                 <div class="col-lg-8">
                     <div id="property-single-carousel" class="swiper-container">
                         <div class="swiper-wrapper">
-                            <div class="carousel-item-b swiper-slide">
-                                <img src="{{ asset('assets/img/slide-1.jpg') }}" alt="">
-                            </div>
-                            <div class="carousel-item-b swiper-slide">
-                                <img src="{{ asset('assets/img/slide-2.jpg') }}" alt="">
-                            </div>
+                            {{--@foreach($property->Secondary_photos as $a)
+                                <div class="carousel-item-b swiper-slide">
+                                    <img src="{{ asset('assets/img/'.a) }}" height="500px" alt="">
+                                </div>
+                            @endforeach--}}
                         </div>
                     </div>
                     <div class="property-single-carousel-pagination carousel-pagination"></div>
@@ -275,10 +274,13 @@
                                         </li>
                                         <li class="d-flex justify-content-between">
                                             <strong>Status:</strong>
-                                           @if( $property->for_sale)
-                                            <span>sale</span>
+                                            @if( $property->for_sale)
+                                                <span>sale</span>
                                             @else
-                                                <span>rent</span>
+                                                <span>rent @if( $property->duration_of_rent !=null)
+                                                        {{   $property->duration_of_rent }} month
+                                                    @endif
+                                                </span>
                                             @endif
                                         </li>
                                         <li class="d-flex justify-content-between">
@@ -287,19 +289,58 @@
                           <sup>2</sup>
                         </span>
                                         </li>
+                                        @if( $property->number_of_rooms !=null)
+                                            <li class="d-flex justify-content-between">
+                                                <strong>Room:</strong>
+                                                <span>{{ $property->number_of_rooms }} </span>
+                                            </li>
+                                        @endif
+
+                                        @if( $property->number_of_bathrooms !=null)
+                                            <li class="d-flex justify-content-between">
+                                                <strong>Bath:</strong>
+                                                <span>{{ $property->number_of_bathrooms }} </span>
+                                            </li>
+                                        @endif
+
                                         <li class="d-flex justify-content-between">
-                                            <strong>Room:</strong>
-                                            <span>{{ $property->number_of_rooms }}</span>
+                                            <strong>floor:</strong>
+                                            <span>{{ $property-> floor_number}}</span>
                                         </li>
                                         <li class="d-flex justify-content-between">
-                                            <strong>Baths:</strong>
-                                            <span>{{ $property->number_of_bathrooms }}</span>
+                                            <strong>number floor:</strong>
+                                            <span>{{ $property->number_of_floors }}</span>
                                         </li>
+                                        @if( $property->dimension_of_the_city !=null )
+                                            <li class="d-flex justify-content-between">
+                                                <strong>The city is far away :</strong>
+                                                <span>{{ $property->dimension_of_the_city }}</span>
+                                            </li>
+                                        @endif
+                                        @if( $property->dimension_of_the_school !=null )
+                                            <li class="d-flex justify-content-between">
+                                                <strong>The school is far away :</strong>
+                                                <span>{{ $property->dimension_of_the_school }}</span>
+                                            </li>
+                                        @endif
+                                        @if( $property->dimension_of_the_market !=null )
+                                            <li class="d-flex justify-content-between ">
+                                                <strong>The market is far away :</strong>
+                                                <span>{{ $property->dimension_of_the_market }}</span>
+                                            </li>
+                                        @endif
                                         <li class="d-flex justify-content-between">
-                                            <strong>Garage:</strong>
-                                            <span>1</span>
+                                            <strong>Announcement date :</strong>
+                                            <span>{{ $property->created_at }}</span>
                                         </li>
+                                        @if( $property->updated_at !=null )
+                                            <li class="d-flex justify-content-between">
+                                                <strong>update date :</strong>
+                                                <span>{{ $property->updated_at }}</span>
+                                            </li>
+                                        @endif
                                     </ul>
+
                                 </div>
                             </div>
                         </div>
@@ -315,7 +356,9 @@
                                 <p class="description color-text-a">
                                     {{ $property->owner_description }}
                                 </p>
+                                <p class="description color-text-a no-margin">
 
+                                </p>
                             </div>
                             <div class="row section-t3">
                                 <div class="col-sm-12">
@@ -326,15 +369,15 @@
                             </div>
                             <div class="amenities-list color-text-a">
                                 <ul class="list-a no-margin">
-                                    <li>Balcony</li>
-                                    <li>Outdoor Kitchen</li>
-                                    <li>Cable Tv</li>
-                                    <li>Deck</li>
-                                    <li>Tennis Courts</li>
-                                    <li>Internet</li>
-                                    <li>Parking</li>
-                                    <li>Sun Room</li>
-                                    <li>Concrete Flooring</li>
+                                    @if( $property->furnished )
+                                        <li>furnished</li>
+                                    @endif
+                                    @if($property->phone_subscription)
+                                        <li>phone_subscription</li>
+                                    @endif
+                                    @if($property->net_subscription)
+                                        <li>net_subscription</li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>
@@ -351,16 +394,16 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 col-lg-4">
-                            <img src="assets/img/agent-4.jpg" alt="" class="img-fluid">
+                            <img src="{{   asset('assets/img/agent-4.jpg')   }}" alt="" class="img-fluid">
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="property-agent">
-                                <h4 class="title-agent">name</h4>
+                                <h3 class="title-agent">name</h3>
                                 <ul class="list-unstyled">
 
                                     <li class="d-flex justify-content-between">
                                         <strong>Mobile:</strong>
-                                        <span class="color-text-a">777 287 378 737</span>
+                                        <span class="color-text-a"></span>
                                     </li>
                                     <li class="d-flex justify-content-between">
                                         <strong>Email:</strong>

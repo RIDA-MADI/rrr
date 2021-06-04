@@ -12,6 +12,4 @@ class Citie extends Model
     protected $table = "cities";
     protected $fillable =['name','id'];
 
-
-
 }

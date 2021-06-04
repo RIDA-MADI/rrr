@@ -15,7 +15,6 @@ class CreateRealEstatesTable extends Migration
     {
         Schema::create('real_estates', function (Blueprint $table) {
             $table->id()->unsigned();
-            $table->string('phone');
             $table->integer('city_id');
             $table->integer('town_id');
             $table->string('type');
@@ -38,10 +37,10 @@ class CreateRealEstatesTable extends Migration
             $table->integer('dimension_of_the_market')->nullable();//in km
             $table->string('owner_description');
             $table->boolean('sold_rented');
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamps();
             $table->integer('owner_id');
-
+            $table->boolean('offer');
+            $table->boolean('auction');
         });
     }
 
